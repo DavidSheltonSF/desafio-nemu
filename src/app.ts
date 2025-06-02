@@ -1,12 +1,43 @@
-import express, {Request, Response} from "express";
+import express, {NextFunction, Request, Response} from "express";
+import multer from "multer"
+import { ExcelHandler } from "./helpers/ExcelHandler";
 
 const app = express();
 const port = 3000;
 
-app.get('/app', (req: Request, res: Response) => {
-  res.send("Testing");
+app.post('/app', (req: Request, res: Response) => {
+
+  const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+      cb(null, `${__dirname}/public`);
+    },
+    filename: (req, file, cb) => {
+      cb(null, `data.xlsx`);
+    }
+  });
+
+  const upload = multer({ storage }).single("file");
+
+  upload(req, res, (err: any) => {
+    if (err instanceof multer.MulterError ){
+      res.status(500).send(err)
+    }
+
+    const filename = req.file?.filename;
+
+    console.log(filename)
+
+    res.status(200).send({
+      message: `The file ${filename} was uploaded successfuly`
+    })
+  });
 });
 
+app.get("/app/data", async (req: Request, res: Response) => {
+  const excelHandler = new ExcelHandler("src/public/data.xlsx");
+  const result = await excelHandler.readLines();
+  res.status(200).send(result);
+})
 
 app.listen(port, () => {
   console.log(`Server is listenign on port ${port}`);
