@@ -1,6 +1,7 @@
 import express, {NextFunction, Request, Response} from "express";
 import multer from "multer"
 import { ExcelHandler } from "./helpers/ExcelHandler";
+import { JourneyService } from "./services/JourneyService";
 
 const app = express();
 const port = 3000;
@@ -37,6 +38,13 @@ app.get("/app/data", async (req: Request, res: Response) => {
   const excelHandler = new ExcelHandler("src/public/data.xlsx");
   const result = await excelHandler.readLines();
   res.status(200).send(result);
+})
+
+app.get("/app/journeys/", async (req: Request, res: Response) => {
+  const service = new JourneyService();
+  const result = await service.execute();
+  console.log(result);
+  res.status(200).send(result[1])
 })
 
 app.listen(port, () => {
