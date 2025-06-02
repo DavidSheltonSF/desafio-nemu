@@ -8,8 +8,8 @@ export class ExcelHandler {
     this.filePath = filePath;
   }
 
-  async readLines(): Promise<any> {
-    const result: any = [];
+  async readLines(): Promise<Array<any>> {
+    const result: Array<any> = [];
 
     await readXlsxFile(this.filePath).then(row => result.push(row));
 
