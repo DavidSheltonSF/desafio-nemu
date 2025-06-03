@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { JourneyService } from "../services/JourneyService";
+import UploadManager from "../config/upload-helper";
 import multer from "multer";
 
 const service = new JourneyService();
@@ -9,34 +10,38 @@ export class JourneyController {
 
     try {
 
-      const storage = multer.diskStorage({
-          destination: (req, file, cb) => {
-            cb(null, `src/public`);
-          },
-          filename: (req, file, cb) => {
-            cb(null, `data.xlsx`);
-          }
-        });
-      
-        const upload = multer({ storage }).single("file");
-      
-        upload(req, res, (err: any) => {
+      if(UploadManager.upload){
+
+        UploadManager.upload(req, res, (err: any) => {
+
           if (err instanceof multer.MulterError ){
-            res.status(500).send(err)
+            console.log(err);
+            res.status(500).send({
+              message: "Internal Error"
+            });
           }
-      
+
           const filename = req.file?.filename;
-      
-          console.log(filename)
       
           res.status(200).send({
             message: `The file ${filename} was uploaded successfuly`
-          })
+          });
         });
+
+      }
+
+      else {
+        console.log("Upload was not configured");
+        res.status(500).send({
+          message: "Internal Error"
+        });
+      }
       
     } catch (error) {
       console.log(error);
-      res.status(500).send(error);
+      res.status(500).send({
+        message: "Internal Error"
+      });
     }
   }
 }
