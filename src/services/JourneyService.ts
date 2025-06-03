@@ -1,4 +1,7 @@
-import { ExcelHandler } from "../helpers/ExcelHandler";
+import { TouchPoint } from "../models/TouchPoint";
+import { Journey } from "../models/Journey";
+import { ExcelHandler } from "./helpers/ExcelHandler";
+import { OrderTouchPointsByDate } from "./helpers/OrderTouchPointsByDate";
 
 export class JourneyService {
 
@@ -11,40 +14,58 @@ export class JourneyService {
   async execute(): Promise<Record<string, any>> {
     const data = await this.handler.readLines();
 
-    console.log(data[0].length)
+    // Remove column identifier
+    data[0].shift();
 
-    const cleanData: any = []
+    const touchPoints: TouchPoint[] = []
     
+    // Extract necessary columns
     data[0].forEach((row: any) => {
-      // sessionId, createAt, source
-      cleanData.push([row[4], row[5], row[0]])
+
+      const tempObj = {
+        sessionId: row[4],
+        createdAt: row[5],
+        source: row[0]
+      };
+
+      touchPoints.push(tempObj);
     });
 
-    //console.log(cleanData)
-
-
-    const journeysObj: any = {}
- 
-    cleanData.forEach((row) => {
+    const journeysObj: Record<string, Omit<TouchPoint, "sessionId">[]> = {}
+    
+    // Groupy touchpoints with same sessionId into objects
+    touchPoints.forEach((row) => {
       //console.log(row[0])
-      if (!journeysObj[row[0]]){
-        journeysObj[row[0]] = []
+      if (!journeysObj[row["sessionId"]]){
+        //console.log(row["sessionId"])
+        journeysObj[row["sessionId"]] = [];
       }
 
-      journeysObj[row[0]].push([row[1], row[2]]);
+      const tempObj = {
+        createdAt: row["createdAt"],
+        source: row["source"]
+      }
+      journeysObj[row["sessionId"]].push(tempObj);
     })
     
     //console.log(journeysObj)
-    const journeys: any = []
+    const journeys: Journey[] = []
 
+    // Extract each journey object and put it into a list
     for (const [k, v] of Object.entries(journeysObj)){
-      const tempObj = new Object()
-      tempObj[k] = v
+
+      const tempObj = {
+        sessionId: k,
+        touchPoints: OrderTouchPointsByDate.execute(v)
+      }
+      
+      tempObj[k] = 
       journeys.push(tempObj)
     }
 
+    console.log(journeys[0]);
 
-    return journeys
+    return journeys;
 
   }
 }
