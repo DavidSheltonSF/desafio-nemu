@@ -4,6 +4,8 @@ import { ExcelHandler } from "./helpers/ExcelHandler";
 import { JourneyService } from "./services/JourneyService";
 
 const app = express();
+app.use(express.json());
+
 const port = 3000;
 
 app.post('/app', (req: Request, res: Response) => {
