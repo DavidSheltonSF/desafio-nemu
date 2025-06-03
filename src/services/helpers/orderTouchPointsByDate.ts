@@ -1,8 +1,6 @@
-import { TouchPoint } from "../models/TouchPoint"
+import { TouchPoint } from "../../models/TouchPoint"
 
-export class OrderTouchPointsByDate {
-  
-  static execute(list: Array<TouchPoint>) {
+export function oderTouchPointsByDate(list: Array<Omit<TouchPoint, "sessionId">>) {
 
     const tempList = list.slice();
 
@@ -11,5 +9,4 @@ export class OrderTouchPointsByDate {
     });
 
     return tempList
-  }
 }
