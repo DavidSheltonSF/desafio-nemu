@@ -44,4 +44,18 @@ export class JourneyController {
       });
     }
   }
+
+  async read(req: Request, res: Response){
+    try {
+      res.status(200).send({
+        body: await service.execute()
+      })
+      
+    } catch (error) {
+      console.log(error);
+      res.status(500).send({
+        message: "Internal Error"
+      });
+    }
+  }
 }
