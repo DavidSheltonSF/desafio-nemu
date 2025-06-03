@@ -59,7 +59,6 @@ export class JourneyService {
         touchPoints: oderTouchPointsByDate(v)
       }
 
-      tempObj[k] = 
       journeys.push(tempObj)
     }
 
