@@ -55,7 +55,7 @@ export class JourneyService {
 
       const tempObj = {
         sessionId: k,
-        touchPoints: oderTouchPointsByDate(removeDubplicatedTouchPoints(v, [v[0].source, v[v.length -1].source]))
+        touchPoints: oderTouchPointsByDate(removeDubplicatedTouchPoints(v, [0, v.length - 1]))
       }
 
       journeys.push(tempObj)
