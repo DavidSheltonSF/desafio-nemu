@@ -2,6 +2,7 @@ import { TouchPoint } from "../models/TouchPoint";
 import { Journey } from "../models/Journey";
 import { ExcelHandler } from "./helpers/ExcelHandler";
 import { oderTouchPointsByDate } from "./helpers/orderTouchPointsByDate";
+import { removeDubplicatedTouchPoints } from "./helpers/removeDuplicatedTouchPoints";
 
 export class JourneyService {
 
@@ -54,7 +55,7 @@ export class JourneyService {
 
       const tempObj = {
         sessionId: k,
-        touchPoints: oderTouchPointsByDate(v)
+        touchPoints: oderTouchPointsByDate(removeDubplicatedTouchPoints(v, [v[0].source, v[v.length -1].source]))
       }
 
       journeys.push(tempObj)
