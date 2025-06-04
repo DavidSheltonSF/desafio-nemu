@@ -47,8 +47,9 @@ export class JourneyController {
 
   async read(req: Request, res: Response){
     try {
+      const result = await service.execute();
       res.status(200).send({
-        body: await service.execute()
+        data: result
       })
       
     } catch (error) {
