@@ -53,7 +53,7 @@ Exemplo de resposta:
             "sessionId": "nemu__0B1woA9Xb",
             "touchPoints": [
                 {
-                    "createdAt": "2025-05-01 00:08:54",
+                    "createdAt": "2025-05-01 00:01:54",
                     "source": "instagram"
                 },
                 {
