@@ -9,7 +9,7 @@ export class JourneyService {
   private readonly handler: ExcelHandler
 
   constructor(){
-    this.handler = new ExcelHandler("src/public/data.xlsx");
+    this.handler = new ExcelHandler("backend/src/public/data.xlsx");
   }
 
   async execute(): Promise<Record<string, any>> {

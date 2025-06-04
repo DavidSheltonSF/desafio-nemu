@@ -3,7 +3,7 @@ import UploadManager from "./upload-helper";
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, `src/public`);
+    cb(null, `backend/src/public`);
   },
   filename: (req, file, cb) => {
     cb(null, `data.xlsx`);
