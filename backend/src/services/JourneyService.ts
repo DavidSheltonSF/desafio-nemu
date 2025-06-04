@@ -6,14 +6,14 @@ import { removeDubplicatedTouchPoints } from "./helpers/removeDuplicatedTouchPoi
 
 export class JourneyService {
 
-  private readonly handler: ExcelHandler
-
-  constructor(){
-    this.handler = new ExcelHandler("backend/src/public/data.xlsx");
-  }
+  constructor(){}
 
   async execute(): Promise<Record<string, any>> {
-    const data = await this.handler.readLines();
+
+  const fileHandleer = new ExcelHandler("src/public/data.xlsx");
+
+
+    const data = await fileHandleer.readLines();
 
     // Remove column identifier
     data[0].shift();
