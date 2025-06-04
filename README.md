@@ -71,7 +71,7 @@ Exemplo de resposta:
 ## 📦 Instalação
 ```bash
 git clone https://github.com/DavidSheltonSF/desafio-nemu.git
-cd desafio-nemu
+cd desafio-nemu/backend
 npm install
 npm run dev
 ```
