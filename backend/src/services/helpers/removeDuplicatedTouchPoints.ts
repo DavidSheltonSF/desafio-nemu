@@ -1,6 +1,6 @@
 import { TouchPoint } from "../../models/TouchPoint";
 
-export function removeDubplicatedTouchPoints(touchPoints: Omit<TouchPoint, "sessionId">[], canRepeat: string[] | null = null){
+export function removeDubplicatedTouchPoints(touchPoints: Omit<TouchPoint, "sessionId">[], canRepeat: number[]){
 
   const result: Omit<TouchPoint, "sessionId">[] = []
   const registeredSources: string[] = [];
@@ -9,18 +9,17 @@ export function removeDubplicatedTouchPoints(touchPoints: Omit<TouchPoint, "sess
 
     const currentTouchPoint = touchPoints[i];
 
-    if(canRepeat?.includes(currentTouchPoint.source)){
+    if(canRepeat.includes(i)){
       result.push(currentTouchPoint);
       continue;
     }
-
+    
     if(!registeredSources.includes(currentTouchPoint.source)){
       result.push(currentTouchPoint);
       registeredSources.push(currentTouchPoint.source); 
       continue;
     }
   }
-
   return result;
 
 }
