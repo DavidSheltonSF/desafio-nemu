@@ -12,7 +12,6 @@ const storage = multer.diskStorage({
 
 export const configUpload = () =>{
   UploadManager.upload = multer({ storage }).single("file");
-  console.log("Upload configured")
 }
 
 

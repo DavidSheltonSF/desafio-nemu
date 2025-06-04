@@ -35,9 +35,8 @@ export class JourneyService {
     
     // Groupy touchpoints by sessionId into objects
     touchPoints.forEach((row) => {
-      //console.log(row[0])
+
       if (!journeysObj[row["sessionId"]]){
-        //console.log(row["sessionId"])
         journeysObj[row["sessionId"]] = [];
       }
 
@@ -48,7 +47,6 @@ export class JourneyService {
       journeysObj[row["sessionId"]].push(tempObj);
     })
     
-    //console.log(journeysObj)
     const journeys: Journey[] = []
 
     // Extract each journey object and put it into a list
@@ -61,8 +59,6 @@ export class JourneyService {
 
       journeys.push(tempObj)
     }
-
-    console.log(journeys[0]);
 
     return journeys;
 
