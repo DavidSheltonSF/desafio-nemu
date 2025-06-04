@@ -13,7 +13,7 @@ export function oderTouchPointsByDate(touchPoints: Array<Omit<TouchPoint, "sessi
     const tempList = touchPoints.slice();
 
     tempList.sort((a, b) => {
-      return Date.parse(a.createdAt) - Date.parse(b.createdAt);
+      return Date.parse(b.createdAt) - Date.parse(a.createdAt);
     });
 
     return tempList
