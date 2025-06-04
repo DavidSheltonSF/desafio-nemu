@@ -8,7 +8,7 @@ import { TouchPoint } from "../../models/TouchPoint"
  * @param touchPoints - An array of touch points
  * @returns An array of touch points ordered by their creation date
  */
-export function oderTouchPointsByDate(touchPoints: Array<Omit<TouchPoint, "sessionId">>): Array<Omit<TouchPoint, "sessionId">> {
+export function orderTouchPointsByDate(touchPoints: Array<Omit<TouchPoint, "sessionId">>): Array<Omit<TouchPoint, "sessionId">> {
 
     const tempList = touchPoints.slice();
 
