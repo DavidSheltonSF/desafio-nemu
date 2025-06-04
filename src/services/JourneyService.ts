@@ -33,7 +33,7 @@ export class JourneyService {
 
     const journeysObj: Record<string, Omit<TouchPoint, "sessionId">[]> = {}
     
-    // Groupy touchpoints with same sessionId into objects
+    // Groupy touchpoints by sessionId into objects
     touchPoints.forEach((row) => {
       //console.log(row[0])
       if (!journeysObj[row["sessionId"]]){
