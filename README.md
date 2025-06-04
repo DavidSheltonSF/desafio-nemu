@@ -9,7 +9,8 @@ Objetivo deste desafio desenvolver uma API que capaz de:
 
 ## 📋 Pré-requisitos
 
-- 🧑‍💻 **[Node.js](https://nodejs.org/)** 
+- 🐳 **[Docker](https://www.docker.com/)** – Recomendado. Node.js já está incluido no contêiner
+- 🧑‍💻 **[Node.js](https://nodejs.org/)** – Apenas necessário se você está executando o app **sem o Docker**
 
 
 ### 📘 Rotas
@@ -73,4 +74,13 @@ git clone https://github.com/DavidSheltonSF/desafio-nemu.git
 cd desafio-nemu
 npm install
 npm run dev
+```
+
+## 🐳 Running the app with Docker
+
+You can run the app with the following commands
+
+```bash
+docker build -t desafio-nemu .
+docker run --env-file .env -p 3000:3000 desafio-nemu
 ```
