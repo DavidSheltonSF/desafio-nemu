@@ -1,7 +1,7 @@
 import readXlsxFile from "read-excel-file/node";
 
 
-export class ExcelHandler {
+export class ExcelFileHandler {
   private readonly filePath: string | undefined;
 
   constructor(filePath: string | undefined){

@@ -1,6 +1,6 @@
 import { TouchPoint } from "../models/TouchPoint";
 import { Journey } from "../models/Journey";
-import { ExcelHandler } from "./helpers/ExcelHandler";
+import { ExcelFileHandler } from "./helpers/ExcelFileHandler";
 import { orderTouchPointsByDate } from "./helpers/orderTouchPointsByDate";
 import { removeDubplicatedTouchPoints } from "./helpers/removeDuplicatedTouchPoints";
 
@@ -10,7 +10,7 @@ export class JourneyService {
 
   async execute(): Promise<Record<string, any>> {
 
-  const fileHandleer = new ExcelHandler("src/public/data.xlsx");
+  const fileHandleer = new ExcelFileHandler("src/public/data.xlsx");
 
 
     const data = await fileHandleer.readLines();
