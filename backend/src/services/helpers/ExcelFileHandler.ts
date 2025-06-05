@@ -9,14 +9,14 @@ export class ExcelFileHandler {
   }
 
   async readLines(): Promise<Array<any>> {
-    const result: Array<any> = [];
+    const data: Array<any> = [];
 
     if(!this.filePath){
       throw new Error("File path is undefined");
     }
 
-    await readXlsxFile(this.filePath).then(row => result.push(row));
+    await readXlsxFile(this.filePath).then(row => data.push(row));
 
-    return result
+    return data;
   }
 }
