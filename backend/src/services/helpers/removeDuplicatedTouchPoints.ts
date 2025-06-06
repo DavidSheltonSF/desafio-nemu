@@ -1,4 +1,4 @@
-import { TouchPoint } from "../../models/TouchPoint";
+import { TouchPoint, TouchPointWithOptionalSessionId } from "../../models/TouchPoint";
 
 
 /**
@@ -9,9 +9,9 @@ import { TouchPoint } from "../../models/TouchPoint";
  * @param canRepeat - An array containing the indices of the touch points that will be returned even if they have duplicated sources
  * @returns An array without touch points  with duplicated sources
  */
-export function removeDubplicatedTouchPoints(touchPoints: Omit<TouchPoint, "sessionId">[], canRepeat: number[]): Omit<TouchPoint, "sessionId">[]{
+export function removeDubplicatedTouchPoints(touchPoints: TouchPointWithOptionalSessionId[], canRepeat: number[]): TouchPointWithOptionalSessionId[]{
 
-  const result: Omit<TouchPoint, "sessionId">[] = []
+  const result: TouchPointWithOptionalSessionId[] = []
   const registeredSources: string[] = [];
 
   for (let i=0; i<touchPoints.length; i++){
