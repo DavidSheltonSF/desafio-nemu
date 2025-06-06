@@ -4,3 +4,7 @@ export interface TouchPoint {
   createdAt: string,
   source: string
 }
+
+export interface TouchPointWithOptionalSessionId extends Omit<TouchPoint, "sessionId"> {
+  sessionId?: string
+}
