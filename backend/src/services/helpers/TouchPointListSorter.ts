@@ -1,9 +1,9 @@
-import { TouchPoint } from "../../models/TouchPoint";
+import { TouchPoint, TouchPointWithOptionalSessionId } from "../../models/TouchPoint";
 
 
 export class TouchPointListSorter {
 
-  static sortByNewest(touchPoints: Array<Omit<TouchPoint, "sessionId">>): Array<Omit<TouchPoint, "sessionId">> {
+  static sortByNewest(touchPoints: TouchPointWithOptionalSessionId[]): TouchPointWithOptionalSessionId[]{
 
     const sortedTouchPoints = touchPoints.slice();
 
@@ -14,7 +14,7 @@ export class TouchPointListSorter {
     return sortedTouchPoints
   }
 
-  static sortByOldest(touchPoints: Array<Omit<TouchPoint, "sessionId">>): Array<Omit<TouchPoint, "sessionId">> {
+  static sortByOldest(touchPoints: TouchPointWithOptionalSessionId[]): TouchPointWithOptionalSessionId[] {
 
     const sortedTouchPoints = touchPoints.slice();
 
