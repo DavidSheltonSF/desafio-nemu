@@ -8,9 +8,9 @@ export class JourneyService {
   constructor() {}
 
   async readFile(): Promise<Record<string, any>> {
-    const fileHandleer = new ExcelFileHandler('src/public/data.xlsx');
+    const fileHandler = new ExcelFileHandler('src/public/data.xlsx');
 
-    const data = await fileHandleer.readLines();
+    const data = await fileHandler.readLines();
 
     // Remove column identifier
     data[0].shift();
