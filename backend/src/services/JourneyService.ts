@@ -13,12 +13,12 @@ export class JourneyService {
     const data = await fileHandler.readLines();
 
     // Remove column identifier
-    data[0].shift();
+    data.shift();
 
     const touchPoints: TouchPoint[] = [];
 
     // Extract necessary columns
-    data[0].forEach((row: any) => {
+    data.forEach((row: any) => {
       const tempObj = {
         sessionId: row[4],
         createdAt: row[5],
