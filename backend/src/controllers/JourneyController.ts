@@ -39,7 +39,7 @@ export class JourneyController {
 
   async read(req: Request, res: Response) {
     try {
-      const result = await service.execute();
+      const result = await service.readFile();
       res.status(200).send({
         data: result,
       });

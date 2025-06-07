@@ -7,7 +7,7 @@ import { TouchPointListSorter } from './helpers/TouchPointListSorter';
 export class JourneyService {
   constructor() {}
 
-  async execute(): Promise<Record<string, any>> {
+  async readFile(): Promise<Record<string, any>> {
     const fileHandleer = new ExcelFileHandler('src/public/data.xlsx');
 
     const data = await fileHandleer.readLines();
