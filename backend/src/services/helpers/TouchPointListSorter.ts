@@ -1,4 +1,4 @@
-import { TouchPoint, TouchPointWithOptionalSessionId } from "../../models/TouchPoint";
+import { TouchPointWithOptionalSessionId } from "../../models/TouchPoint";
 
 
 export class TouchPointListSorter {
