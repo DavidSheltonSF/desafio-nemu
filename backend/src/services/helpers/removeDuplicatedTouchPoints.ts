@@ -11,7 +11,7 @@ import { TouchPoint, TouchPointWithOptionalSessionId } from "../../models/TouchP
  */
 export function removeDubplicatedTouchPoints(touchPoints: TouchPointWithOptionalSessionId[], canRepeat: number[]): TouchPointWithOptionalSessionId[]{
 
-  const result: TouchPointWithOptionalSessionId[] = []
+  const filteredTouchPoints: TouchPointWithOptionalSessionId[] = []
   const registeredSources: string[] = [];
 
   for (let i=0; i<touchPoints.length; i++){
@@ -19,16 +19,16 @@ export function removeDubplicatedTouchPoints(touchPoints: TouchPointWithOptional
     const currentTouchPoint = touchPoints[i];
 
     if(canRepeat.includes(i)){
-      result.push(currentTouchPoint);
+      filteredTouchPoints.push(currentTouchPoint);
       continue;
     }
     
     if(!registeredSources.includes(currentTouchPoint.source)){
-      result.push(currentTouchPoint);
+      filteredTouchPoints.push(currentTouchPoint);
       registeredSources.push(currentTouchPoint.source); 
       continue;
     }
   }
-  return result;
+  return filteredTouchPoints;
 
 }
