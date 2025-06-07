@@ -26,9 +26,10 @@ export function removeDubplicatedTouchPoints(touchPoints: TouchPointWithOptional
     if(!registeredSources.includes(currentTouchPoint.source)){
       filteredTouchPoints.push(currentTouchPoint);
       registeredSources.push(currentTouchPoint.source); 
-      continue;
     }
+
   }
+  
   return filteredTouchPoints;
 
 }
