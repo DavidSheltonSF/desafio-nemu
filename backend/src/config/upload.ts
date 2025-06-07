@@ -1,5 +1,5 @@
-import multer from "multer";
-import UploadManager from "./upload-helper";
+import multer from 'multer';
+import UploadManager from './upload-helper';
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -7,11 +7,9 @@ const storage = multer.diskStorage({
   },
   filename: (req, file, cb) => {
     cb(null, `data.xlsx`);
-  }
-})
+  },
+});
 
-export const configUpload = () =>{
-  UploadManager.upload = multer({ storage }).single("file");
-}
-
-
+export const configUpload = () => {
+  UploadManager.upload = multer({ storage }).single('file');
+};
