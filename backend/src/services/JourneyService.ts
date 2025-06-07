@@ -32,12 +32,12 @@ export class JourneyService {
       touchPoints.push(touchPoint);
     });
 
-    const journeysObj = groupTouchPointsBySessionId(touchPoints);
+    const journeysGroup = groupTouchPointsBySessionId(touchPoints);
 
     const journeys: Journey[] = [];
 
     // Extract each journey object and put it into a list
-    for (const [k, v] of Object.entries(journeysObj)) {
+    for (const [k, v] of Object.entries(journeysGroup)) {
       const tempObj = {
         sessionId: k,
         touchPoints: TouchPointListSorter.sortByOldest(
