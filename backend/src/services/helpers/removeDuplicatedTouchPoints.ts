@@ -9,7 +9,7 @@ import { TouchPoint, TouchPointWithOptionalSessionId } from "../../models/TouchP
  * @param canRepeat - An array containing the indices of the touch points that will be returned even if they have duplicated sources
  * @returns An array without touch points  with duplicated sources
  */
-export function removeDubplicatedTouchPoints(touchPoints: TouchPointWithOptionalSessionId[], canRepeat: number[]): TouchPointWithOptionalSessionId[]{
+export function removeDubplicatedTouchPoints(touchPoints: TouchPointWithOptionalSessionId[], repeatableIndexes: number[]): TouchPointWithOptionalSessionId[]{
 
   const filteredTouchPoints: TouchPointWithOptionalSessionId[] = []
   const registeredSources: string[] = [];
@@ -18,7 +18,7 @@ export function removeDubplicatedTouchPoints(touchPoints: TouchPointWithOptional
 
     const currentTouchPoint = touchPoints[i];
 
-    if(canRepeat.includes(i)){
+    if(repeatableIndexes.includes(i)){
       filteredTouchPoints.push(currentTouchPoint);
       continue;
     }
