@@ -1,17 +1,14 @@
-import {
-  TouchPoint,
-  TouchPointWithOptionalSessionId,
-} from '../models/TouchPoint';
+import { TouchPoint } from '../models/TouchPoint';
 import { Journey } from '../models/Journey';
 import { ExcelFileHandler } from './helpers/ExcelFileHandler';
 import { removeDubplicatedTouchPoints } from './helpers/removeDuplicatedTouchPoints';
 import { TouchPointListSorter } from './helpers/TouchPointListSorter';
-import { groupTouchPointsBySessionId } from './helpers/groupTouchPointsBySessionId';
+import { TouchPointGroup } from './helpers/TouchPointGroup';
 
 export class JourneyService {
   constructor() {}
 
-  async readFile(): Promise<Record<string, any>> {
+  async readFile(): Promise<Journey[]> {
     const fileHandler = new ExcelFileHandler('src/public/data.xlsx');
 
     const data = await fileHandler.readLines();
@@ -19,8 +16,7 @@ export class JourneyService {
     // Remove column identifier
     data.shift();
 
-    const touchPoints: TouchPoint[] = [];
-
+    const touchPointGroup = new TouchPointGroup();
     // Extract necessary columns
     data.forEach((row: any) => {
       const touchPoint: TouchPoint = {
@@ -29,25 +25,19 @@ export class JourneyService {
         source: row[0],
       };
 
-      touchPoints.push(touchPoint);
+      touchPointGroup.add(touchPoint);
     });
 
-    const journeysGroup = groupTouchPointsBySessionId(touchPoints);
+    const journeys = touchPointGroup.groupBySessionId();
 
-    const journeys: Journey[] = [];
-
-    // Extract each journey object and put it into a list
-    for (const [k, v] of Object.entries(journeysGroup)) {
-      const tempObj = {
-        sessionId: k,
-        touchPoints: TouchPointListSorter.sortByOldest(
-          removeDubplicatedTouchPoints(v, [0, v.length - 1])
-        ),
-      };
-
-      journeys.push(tempObj);
+    for (const journey of journeys) {
+      journey.touchPoints = TouchPointListSorter.sortByOldest(
+        removeDubplicatedTouchPoints(journey.touchPoints, [
+          0,
+          journey.touchPoints.length - 1,
+        ])
+      );
     }
-
     return journeys;
   }
 }
