@@ -1,7 +1,7 @@
-import express from "express";
-import { configUpload } from "./config/upload";
-import journeyRoutes from "./routes/journey"
-import { config } from "dotenv";
+import express from 'express';
+import { configUpload } from './config/upload';
+import journeyRoutes from './routes/journey';
+import { config } from 'dotenv';
 
 config();
 configUpload();
@@ -14,7 +14,6 @@ const port = process.env.PORT;
 
 app.use(journeyRoutes);
 
-
 app.listen(port, () => {
   console.log(`Server is listenign on port ${port}`);
-})
+});
