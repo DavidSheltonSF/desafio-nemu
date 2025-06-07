@@ -1,4 +1,4 @@
-import { TouchPoint, TouchPointWithOptionalSessionId } from "../../models/TouchPoint";
+import { TouchPointWithOptionalSessionId } from "../../models/TouchPoint";
 
 export function removeDubplicatedTouchPoints(touchPoints: TouchPointWithOptionalSessionId[], repeatableIndexes: number[]): TouchPointWithOptionalSessionId[]{
 
