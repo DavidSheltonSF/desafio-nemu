@@ -1,14 +1,5 @@
 import { TouchPoint, TouchPointWithOptionalSessionId } from "../../models/TouchPoint";
 
-
-/**
- * 
- * Removes touch points with duplicated sources
- * 
- * @param touchPoints - An array of touch points
- * @param canRepeat - An array containing the indices of the touch points that will be returned even if they have duplicated sources
- * @returns An array without touch points  with duplicated sources
- */
 export function removeDubplicatedTouchPoints(touchPoints: TouchPointWithOptionalSessionId[], repeatableIndexes: number[]): TouchPointWithOptionalSessionId[]{
 
   const filteredTouchPoints: TouchPointWithOptionalSessionId[] = []
@@ -29,7 +20,7 @@ export function removeDubplicatedTouchPoints(touchPoints: TouchPointWithOptional
     }
 
   }
-  
+
   return filteredTouchPoints;
 
 }
