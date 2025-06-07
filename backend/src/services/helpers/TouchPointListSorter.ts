@@ -14,7 +14,6 @@ export class TouchPointListSorter {
   }
 
   static sortByOldest(touchPoints: TouchPointWithOptionalSessionId[]): TouchPointWithOptionalSessionId[] {
-
     const sortedTouchPoints = touchPoints.slice();
 
     sortedTouchPoints.sort(
