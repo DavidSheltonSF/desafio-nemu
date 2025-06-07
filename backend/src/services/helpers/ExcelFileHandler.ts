@@ -1,4 +1,4 @@
-import readXlsxFile from 'read-excel-file/node';
+import readXlsxFile, { Row } from 'read-excel-file/node';
 
 export class ExcelFileHandler {
   private readonly filePath: string | undefined;
@@ -7,7 +7,7 @@ export class ExcelFileHandler {
     this.filePath = filePath;
   }
 
-  async readLines(): Promise<Array<any>> {
+  async readLines(): Promise<Row[]> {
     if (!this.filePath) {
       throw new Error('File path is undefined');
     }
