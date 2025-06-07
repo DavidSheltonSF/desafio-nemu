@@ -3,7 +3,7 @@ import { Journey } from '../models/Journey';
 import { ExcelFileHandler } from './helpers/ExcelFileHandler';
 import { removeDubplicatedTouchPoints } from './helpers/removeDuplicatedTouchPoints';
 import { TouchPointListSorter } from './helpers/TouchPointListSorter';
-import { TouchPointGroup } from './helpers/TouchPointGroup';
+import { TouchPointGrouper } from './helpers/TouchPointGrouper';
 
 export class JourneyService {
   constructor() {}
@@ -16,7 +16,7 @@ export class JourneyService {
     // Remove column identifier
     data.shift();
 
-    const touchPointGroup = new TouchPointGroup();
+    const touchPoints: TouchPoint[] = [];
     // Extract necessary columns
     data.forEach((row: any) => {
       const touchPoint: TouchPoint = {
@@ -25,10 +25,10 @@ export class JourneyService {
         source: row[0],
       };
 
-      touchPointGroup.add(touchPoint);
+      touchPoints.push(touchPoint);
     });
 
-    const journeys = touchPointGroup.groupBySessionId();
+    const journeys = TouchPointGrouper.groupBySessionId(touchPoints);
 
     for (const journey of journeys) {
       journey.touchPoints = TouchPointListSorter.sortByOldest(
