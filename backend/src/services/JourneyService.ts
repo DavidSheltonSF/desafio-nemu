@@ -6,6 +6,7 @@ import { Journey } from '../models/Journey';
 import { ExcelFileHandler } from './helpers/ExcelFileHandler';
 import { removeDubplicatedTouchPoints } from './helpers/removeDuplicatedTouchPoints';
 import { TouchPointListSorter } from './helpers/TouchPointListSorter';
+import { groupTouchPointsBySessionId } from './helpers/groupTouchPointsBySessionId';
 
 export class JourneyService {
   constructor() {}
@@ -30,21 +31,8 @@ export class JourneyService {
 
       touchPoints.push(touchPoint);
     });
-    
-    const journeysObj: Record<string, TouchPointWithOptionalSessionId[]> = {};
 
-    // Groupy touchpoints by sessionId into objects
-    touchPoints.forEach((row) => {
-      if (!journeysObj[row['sessionId']]) {
-        journeysObj[row['sessionId']] = [];
-      }
-
-      const touchPoint: TouchPointWithOptionalSessionId = {
-        createdAt: row['createdAt'],
-        source: row['source'],
-      };
-      journeysObj[row['sessionId']].push(touchPoint);
-    });
+    const journeysObj = groupTouchPointsBySessionId(touchPoints);
 
     const journeys: Journey[] = [];
 
