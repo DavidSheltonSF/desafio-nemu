@@ -4,3 +4,4 @@ data.xlsx
 run-script.ts
 dist
 .env
+.prettierrc
